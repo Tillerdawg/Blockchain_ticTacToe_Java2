@@ -19,6 +19,7 @@ public class NoobChain {
 	public static Wallet walletO;
 	public static Transaction genesisTransaction;
 	public static Transaction anotherTransaction;
+	public static Scanner in;
 
 	public static void main(String[] args) {
 		// add our blocks to the blockchain ArrayList:
@@ -29,6 +30,7 @@ public class NoobChain {
 		walletX = new Wallet();
 		walletO = new Wallet();
 		Wallet coinbase = new Wallet();
+		in = new Scanner(System.in);
 
 		// create genesis transaction, which sends 100 NoobCoin to WalletX:
 		// this adds funds to X's wallet
@@ -56,69 +58,77 @@ public class NoobChain {
 		genesis.addTransaction(anotherTransaction);
 		addBlock(genesis);
 
+		placeBet();
+
+	}
+
+	private static void placeBet() {
+
+		// cannot bet more than you have, check both x and o
+		int betX;
 		do {
-			Scanner in = new Scanner(System.in);
-
-			// cannot bet more than you have, check both x and o
-			int betX;
-			do {
-				System.out.println("\nWalletX Value:" + genesisTransaction.getOutputsValue());
-				System.out.println("\"X\" Place Your Bet: ");
-				betX = in.nextInt();
-				if (genesisTransaction.getOutputsValue() >= betX) {
-					break;
-				}
-			} while (true);
-
-			int betO;
-			do {
-				System.out.println("\nWalletO Value:" + anotherTransaction.getOutputsValue());
-				System.out.println("\"O\" Place Your Bet: ");
-				betO = in.nextInt();
-				if (anotherTransaction.getOutputsValue() >= betO) {
-					break;
-				}
-			} while (true);
-
-			// play the game
-			TicTacToe ttt = new TicTacToe();
-			String winner = ttt.play();
-
-			if (winner.equals("X")) {
-				Block block1 = new Block(genesis.hash);
-				System.out.println("\nWalletX's beginning balance is: " + walletX.getBalance());
-				System.out.println("\nWalletO's beginning balance is: " + walletO.getBalance());
-				System.out.println("\nWalletO is Attempting to send funds (" + betO + ") to WalletX...");
-				block1.addTransaction(walletO.sendFunds(walletX.publicKey, betO));
-				addBlock(block1);
-
-				System.out.println("\nWalletX's new balance is: " + walletX.getBalance());
-				System.out.println("\nWalletO's new balance is: " + walletO.getBalance());
-			} else if (winner.equals("O")) {
-				Block block1 = new Block(genesis.hash);
-				System.out.println("\nWalletX's beginning balance is: " + walletX.getBalance());
-				System.out.println("\nWalletO's beginning balance is: " + walletO.getBalance());
-				System.out.println("\nWalletX is Attempting to send funds (" + betX + ") to WalletO...");
-				block1.addTransaction(walletX.sendFunds(walletO.publicKey, betX));
-				addBlock(block1);
-				System.out.println("\nWalletX's new balance is: " + walletX.getBalance());
-				System.out.println("\nWalletO's new balance is: " + walletO.getBalance());
-			} else if (winner.equals("Draw")) {
-				System.out.println("\nIt's a DRAW, bets are off");
-				System.out.println("\nWalletX's balance is: " + walletX.getBalance());
-				System.out.println("\nWalletO's balance is: " + walletO.getBalance());
-			}
-
-			isChainValid();
-
-			System.out.println("\nPlay Again? Y-Yes N-No");
-			String choice = in.next();
-			if (choice.equalsIgnoreCase("N")) {
-				in.close();
+			System.out.println("\nWalletX Value: " + walletX.getBalance());
+			System.out.println("\"X\" Place Your Bet: ");
+			betX = in.nextInt();
+			if (genesisTransaction.getOutputsValue() >= betX) {
 				break;
 			}
-			in.close();
 		} while (true);
+
+		int betO;
+		do {
+//			System.out.println("\nWalletO Value: " + anotherTransaction.getOutputsValue());
+			System.out.println("\nWalletO Value: " + walletO.getBalance());
+			System.out.println("\"O\" Place Your Bet: ");
+			betO = in.nextInt();
+			if (anotherTransaction.getOutputsValue() >= betO) {
+				break;
+			}
+		} while (true);
+
+		playGame(betX, betO);
+		in.close();
+	}
+
+	private static void playGame(int betX, int betO) {
+		// play the game
+		TicTacToe ttt = new TicTacToe();
+		String winner = ttt.play();
+		String lastBlock = blockchain.get(blockchain.size() - 1).hash;
+
+		System.out.println("\nWalletX's beginning balance is: " + walletX.getBalance());
+		System.out.println("\nWalletO's beginning balance is: " + walletO.getBalance());
+
+		if (winner.equals("X")) {
+			Block block1 = new Block(lastBlock);
+			System.out.println("\nWalletO is attempting to send funds (" + betO + ") to WalletX...");
+			block1.addTransaction(walletO.sendFunds(walletX.publicKey, betO));
+			addBlock(block1);
+		} else if (winner.equals("O")) {
+			Block block1 = new Block(lastBlock);
+			System.out.println("\nWalletX is attempting to send funds (" + betX + ") to WalletO...");
+			block1.addTransaction(walletX.sendFunds(walletO.publicKey, betX));
+			addBlock(block1);
+		} else if (winner.equals("Draw")) {
+			System.out.println("\nIt's a DRAW, bets are off");
+		}
+
+		System.out.println("\nWalletX's balance is: " + walletX.getBalance());
+		System.out.println("\nWalletO's balance is: " + walletO.getBalance());
+
+		isChainValid();
+
+		playAgain();
+
+	}
+
+	private static void playAgain() {
+		System.out.println("\nPlay Again? Y-Yes N-No");
+		String choice = in.next();
+		if (choice.equalsIgnoreCase("Y")) {
+			placeBet();
+		}
+
 	}
 
 	public static Boolean isChainValid() {
