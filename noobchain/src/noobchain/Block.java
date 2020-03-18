@@ -77,7 +77,7 @@ public class Block {
 
 		// print successful transaction message and print the transaction's SwansonQuote
 		// to the console
-		System.out.println("Transaction Successfully added to Block: Ron Swanson - " + transaction.swansonQuote);
+		System.out.println("\nTransaction Successfully added to Block: Ron Swanson - " + transaction.swansonQuote);
 		// return true
 		return true;
 	}
