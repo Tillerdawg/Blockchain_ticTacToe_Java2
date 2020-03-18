@@ -77,7 +77,6 @@ public class NoobChain {
 
 		int betO;
 		do {
-//			System.out.println("\nWalletO Value: " + anotherTransaction.getOutputsValue());
 			System.out.println("\nWalletO Value: " + walletO.getBalance());
 			System.out.println("\"O\" Place Your Bet: ");
 			betO = in.nextInt();
