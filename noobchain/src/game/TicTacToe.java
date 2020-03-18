@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * 
+ *
  * @author MeneXia (Xavi Ablaza)
  *
  */
@@ -14,7 +14,7 @@ public class TicTacToe {
 	static String[] board;
 	static String turn;
 
-	//public static void main(String[] args) {
+	// public static void main(String[] args) {
 	public String play() {
 		scanner = new Scanner(System.in);
 		board = new String[9];
@@ -25,12 +25,12 @@ public class TicTacToe {
 		System.out.println("--------------------------------");
 		System.out.println("Welcome to 2 Player Tic Tac Toe.");
 		System.out.println("--------------------------------");
-		
+
 		printBoard();
-		
+
 		System.out.println("X's will play first. Enter a slot number to place X in:");
 
-		//Main game loop
+		// Main game loop
 		while (winner == null) {
 			int numInput;
 			try {
@@ -43,8 +43,8 @@ public class TicTacToe {
 				System.out.println("Invalid input; re-enter slot number:");
 				continue;
 			}
-			if (board[numInput-1].equals(String.valueOf(numInput))) {
-				board[numInput-1] = turn;
+			if (board[numInput - 1].equals(String.valueOf(numInput))) {
+				board[numInput - 1] = turn;
 				if (turn.equals("X")) {
 					turn = "O";
 				} else {
@@ -60,7 +60,7 @@ public class TicTacToe {
 		if (winner.equalsIgnoreCase("draw")) {
 			System.out.println("It's a draw! Thanks for playing.");
 		} else {
-			System.out.println("Congratulations! " + winner + "'s have won! Thanks for playing.");
+			System.out.println("Congratulations! " + winner + " wins! Thanks for playing.");
 		}
 		return winner;
 	}
@@ -102,10 +102,10 @@ public class TicTacToe {
 		}
 
 		for (int a = 0; a < 9; a++) {
-			if (Arrays.asList(board).contains(String.valueOf(a+1))) {
+			if (Arrays.asList(board).contains(String.valueOf(a + 1))) {
 				break;
-			}
-			else if (a == 8) return "draw";
+			} else if (a == 8)
+				return "draw";
 		}
 
 		System.out.println(turn + "'s turn; enter a slot number to place " + turn + " in:");
@@ -113,18 +113,18 @@ public class TicTacToe {
 	}
 
 	static void printBoard() {
-		System.out.println("«-----------»");
+		System.out.println("ï¿½-----------ï¿½");
 		System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
 		System.out.println("|-----------|");
 		System.out.println("| " + board[3] + " | " + board[4] + " | " + board[5] + " |");
 		System.out.println("|-----------|");
 		System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
-		System.out.println("«-----------»");
+		System.out.println("ï¿½-----------ï¿½");
 	}
 
 	static void populateEmptyBoard() {
 		for (int a = 0; a < 9; a++) {
-			board[a] = String.valueOf(a+1);
+			board[a] = String.valueOf(a + 1);
 		}
 	}
 }

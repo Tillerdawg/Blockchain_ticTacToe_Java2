@@ -32,7 +32,7 @@ public class NoobChain {
 
 		// create genesis transaction, which sends 100 NoobCoin to WalletX:
 		// this adds funds to X's wallet
-		genesisTransaction = new Transaction(coinbase.publicKey, walletX.publicKey, 101f, null);
+		genesisTransaction = new Transaction(coinbase.publicKey, walletX.publicKey, 100f, null);
 		genesisTransaction.generateSignature(coinbase.privateKey); // manually sign the genesis transaction
 		genesisTransaction.transactionId = "0"; // manually set the transaction id
 		genesisTransaction.outputs.add(new TransactionOutput(genesisTransaction.recipient, genesisTransaction.value,
@@ -45,7 +45,7 @@ public class NoobChain {
 		Block genesis = new Block("0");
 
 		// this adds funds to O's wallet
-		anotherTransaction = new Transaction(coinbase.publicKey, walletO.publicKey, 99f, null);
+		anotherTransaction = new Transaction(coinbase.publicKey, walletO.publicKey, 100f, null);
 		anotherTransaction.generateSignature(coinbase.privateKey);
 		anotherTransaction.transactionId = "0";
 		anotherTransaction.outputs.add(new TransactionOutput(anotherTransaction.recipient, anotherTransaction.value,
@@ -103,7 +103,7 @@ public class NoobChain {
 				System.out.println("\nWalletX's new balance is: " + walletX.getBalance());
 				System.out.println("\nWalletO's new balance is: " + walletO.getBalance());
 			} else if (winner.equals("Draw")) {
-				System.out.println("It's a DRAW, bets are off");
+				System.out.println("\nIt's a DRAW, bets are off");
 				System.out.println("\nWalletX's balance is: " + walletX.getBalance());
 				System.out.println("\nWalletO's balance is: " + walletO.getBalance());
 			}
