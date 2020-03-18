@@ -86,24 +86,26 @@ public class NoobChain {
 
 			if (winner.equals("X")) {
 				Block block1 = new Block(genesis.hash);
-				System.out.println("\nWalletX's balance is: " + walletX.getBalance());
-				System.out.println("\nWalletX is Attempting to send funds (" + betX + ") to WalletO...");
-				block1.addTransaction(walletX.sendFunds(walletO.publicKey, betX));
-				addBlock(block1);
-				System.out.println("\nWalletX's balance is: " + walletX.getBalance());
-				System.out.println("WalletO's balance is: " + walletO.getBalance());
-			} else if (winner.equals("O")) {
-				Block block1 = new Block(genesis.hash);
-				System.out.println("\nWalletO's balance is: " + walletO.getBalance());
+				System.out.println("\nWalletX's beginning balance is: " + walletX.getBalance());
+				System.out.println("\nWalletO's beginning balance is: " + walletO.getBalance());
 				System.out.println("\nWalletO is Attempting to send funds (" + betO + ") to WalletX...");
 				block1.addTransaction(walletO.sendFunds(walletX.publicKey, betO));
 				addBlock(block1);
-				System.out.println("\nWalletX's balance is: " + walletX.getBalance());
-				System.out.println("WalletO's balance is: " + walletO.getBalance());
+				System.out.println("\nWalletX's new balance is: " + walletX.getBalance());
+				System.out.println("\nWalletO's new balance is: " + walletO.getBalance());
+			} else if (winner.equals("O")) {
+				Block block1 = new Block(genesis.hash);
+				System.out.println("\nWalletX's beginning balance is: " + walletX.getBalance());
+				System.out.println("\nWalletO's beginning balance is: " + walletO.getBalance());
+				System.out.println("\nWalletX is Attempting to send funds (" + betX + ") to WalletO...");
+				block1.addTransaction(walletX.sendFunds(walletO.publicKey, betX));
+				addBlock(block1);
+				System.out.println("\nWalletX's new balance is: " + walletX.getBalance());
+				System.out.println("\nWalletO's new balance is: " + walletO.getBalance());
 			} else if (winner.equals("Draw")) {
 				System.out.println("It's a DRAW, bets are off");
 				System.out.println("\nWalletX's balance is: " + walletX.getBalance());
-				System.out.println("WalletO's balance is: " + walletO.getBalance());
+				System.out.println("\nWalletO's balance is: " + walletO.getBalance());
 			}
 
 			isChainValid();
