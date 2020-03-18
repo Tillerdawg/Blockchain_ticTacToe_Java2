@@ -47,7 +47,7 @@ public class NoobChain {
 		// this adds funds to O's wallet
 		anotherTransaction = new Transaction(coinbase.publicKey, walletO.publicKey, 100f, null);
 		anotherTransaction.generateSignature(coinbase.privateKey);
-		anotherTransaction.transactionId = "0";
+		anotherTransaction.transactionId = "1";
 		anotherTransaction.outputs.add(new TransactionOutput(anotherTransaction.recipient, anotherTransaction.value,
 				anotherTransaction.transactionId));
 		UTXOs.put(anotherTransaction.outputs.get(0).id, anotherTransaction.outputs.get(0));
@@ -62,7 +62,7 @@ public class NoobChain {
 			// cannot bet more than you have, check both x and o
 			int betX;
 			do {
-				System.out.println("Current Wallet Value:" + genesisTransaction.getOutputsValue());
+				System.out.println("\nWalletX Value:" + genesisTransaction.getOutputsValue());
 				System.out.println("\"X\" Place Your Bet: ");
 				betX = in.nextInt();
 				if (genesisTransaction.getOutputsValue() >= betX) {
@@ -72,7 +72,7 @@ public class NoobChain {
 
 			int betO;
 			do {
-				System.out.println("Current Wallet Value:" + anotherTransaction.getOutputsValue());
+				System.out.println("\nWalletO Value:" + anotherTransaction.getOutputsValue());
 				System.out.println("\"O\" Place Your Bet: ");
 				betO = in.nextInt();
 				if (anotherTransaction.getOutputsValue() >= betO) {
@@ -91,6 +91,7 @@ public class NoobChain {
 				System.out.println("\nWalletO is Attempting to send funds (" + betO + ") to WalletX...");
 				block1.addTransaction(walletO.sendFunds(walletX.publicKey, betO));
 				addBlock(block1);
+
 				System.out.println("\nWalletX's new balance is: " + walletX.getBalance());
 				System.out.println("\nWalletO's new balance is: " + walletO.getBalance());
 			} else if (winner.equals("O")) {
