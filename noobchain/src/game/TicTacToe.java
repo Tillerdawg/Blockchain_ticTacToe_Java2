@@ -2,11 +2,12 @@ package game;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
  *
- * @author MeneXia (Xavi Ablaza)
+ * @author MeneXia (Xavi Ablaza); adapted by Jason A. Tiller
  *
  */
 public class TicTacToe {
@@ -18,7 +19,13 @@ public class TicTacToe {
 	public String play() {
 		scanner = new Scanner(System.in);
 		board = new String[9];
-		turn = "X";
+		Random rand = new Random();
+		int randomInt = rand.nextInt(1000);
+		if (randomInt % 2 == 0) {
+			turn = "X";
+		} else {
+			turn = "O";
+		}
 		String winner = null;
 		populateEmptyBoard();
 
@@ -28,7 +35,7 @@ public class TicTacToe {
 
 		printBoard();
 
-		System.out.println("X's will play first. Enter a slot number to place X in:");
+		System.out.println(turn + " will play first. Enter a slot number to place X in:");
 
 		// Main game loop
 		while (winner == null) {
