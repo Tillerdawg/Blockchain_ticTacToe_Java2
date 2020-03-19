@@ -127,7 +127,8 @@ public class NoobChain {
 		if (choice.equalsIgnoreCase("Y")) {
 			placeBet();
 		} else {
-			System.out.println("Thank you for playing Tic-Tac-Toe!");
+			System.out.println("\nThank you for playing Tic-Tac-Toe!");
+			in.close();
 		}
 
 	}
