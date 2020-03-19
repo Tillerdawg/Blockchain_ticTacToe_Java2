@@ -24,7 +24,7 @@ public class TransactionOutput {
 		this.parentTransactionId = parentTransactionId; // sets the parent transaction's id
 		// creates a unique id value for the transaction
 		this.id = StringUtil
-				.applySha256(StringUtil.getStringFromKey(recipient) + Float.toString(value) + parentTransactionId);
+				.applySha512(StringUtil.getStringFromKey(recipient) + Float.toString(value) + parentTransactionId);
 	}
 
 	// a boolean method for checking to see a coin belongs to the recipient
