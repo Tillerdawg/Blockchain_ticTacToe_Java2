@@ -199,7 +199,7 @@ public class NoobChain {
 				}
 
 				if (currentTransaction.outputs.get(0).recipient != currentTransaction.recipient) {
-					System.out.println("#Transaction(" + t + ") output reciepient is not who it should be");
+					System.out.println("#Transaction(" + t + ") output recipient is not who it should be");
 					return false;
 				}
 				if (currentTransaction.outputs.get(1).recipient != currentTransaction.sender) {
