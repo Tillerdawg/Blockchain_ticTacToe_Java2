@@ -35,7 +35,7 @@ public class TicTacToe {
 
 		printBoard();
 
-		System.out.println(turn + " will play first. Enter a slot number to place X in:");
+		System.out.println(turn + " will play first. Enter a slot number to place " + turn + " in:");
 
 		// Main game loop
 		while (winner == null) {
