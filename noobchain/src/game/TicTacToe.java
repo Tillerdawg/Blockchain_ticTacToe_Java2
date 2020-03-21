@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author MeneXia (Xavi Ablaza); adapted by Jason A. Tiller
+ * @author MeneXia (Xavi Ablaza); adapted by Jason A. Tiller and Steven Rogers
  *
  */
 public class TicTacToe {
@@ -21,10 +21,9 @@ public class TicTacToe {
 		board = new String[9];
 		Random rand = new Random();
 		int randomInt = rand.nextInt(1000);
+		turn = "O";
 		if (randomInt % 2 == 0) {
 			turn = "X";
-		} else {
-			turn = "O";
 		}
 		String winner = null;
 		populateEmptyBoard();
@@ -120,13 +119,13 @@ public class TicTacToe {
 	}
 
 	static void printBoard() {
-		System.out.println("�-----------�");
+		System.out.println("-------------");
 		System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
 		System.out.println("|-----------|");
 		System.out.println("| " + board[3] + " | " + board[4] + " | " + board[5] + " |");
 		System.out.println("|-----------|");
 		System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
-		System.out.println("�-----------�");
+		System.out.println("-------------");
 	}
 
 	static void populateEmptyBoard() {
