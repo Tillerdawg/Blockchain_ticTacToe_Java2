@@ -143,6 +143,7 @@ public class NoobChain {
 																									// given block
 																									// state.
 		tempUTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
+		tempUTXOs.put(anotherTransaction.outputs.get(0).id, anotherTransaction.outputs.get(0));
 
 		// loop through blockchain to check hashes:
 		for (int i = 1; i < blockchain.size(); i++) {
