@@ -49,7 +49,7 @@ public class NoobChain {
 		// this adds funds to O's wallet
 		anotherTransaction = new Transaction(coinbase.publicKey, walletO.publicKey, 100f, null);
 		anotherTransaction.generateSignature(coinbase.privateKey);
-		anotherTransaction.transactionId = "1";
+		anotherTransaction.transactionId = "0";
 		anotherTransaction.outputs.add(new TransactionOutput(anotherTransaction.recipient, anotherTransaction.value,
 				anotherTransaction.transactionId));
 		UTXOs.put(anotherTransaction.outputs.get(0).id, anotherTransaction.outputs.get(0));
@@ -124,7 +124,7 @@ public class NoobChain {
 	private static void playAgain() {
 		System.out.println("\nPlay Again? Y-Yes N-No");
 		String choice = in.next();
-		if (choice.equalsIgnoreCase("Y")) {
+		if (choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("Yes")) {
 			placeBet();
 		} else {
 			System.out.println("\nThank you for playing Tic-Tac-Toe!");
@@ -220,30 +220,3 @@ public class NoobChain {
 		blockchain.add(newBlock);
 	}
 }
-
-/*
- * public static void main(String[] args) { //add our blocks to the blockchain
- * ArrayList: Security.addProvider(new
- * org.bouncycastle.jce.provider.BouncyCastleProvider()); //Setup Bouncey castle
- * as a Security Provider
- *
- * //WalletX = new Wallet(); //WalletO = new Wallet();
- *
- * //System.out.println("Private and public keys:");
- * //System.out.println(StringUtil.getStringFromKey(WalletX.privateKey));
- * //System.out.println(StringUtil.getStringFromKey(WalletX.publicKey));
- *
- * createGenesis();
- *
- * //Transaction transaction = new Transaction(WalletX.publicKey,
- * WalletO.publicKey, 5); //transaction.signature =
- * transaction.generateSignature(WalletX.privateKey);
- *
- * //System.out.println("Is signature verified:");
- * //System.out.println(transaction.verifiySignature());
- *
- * }
- */
-
-//System.out.println("Trying to Mine block 1... ");
-//addBlock(new Block("Hi im the first block", "0"));
