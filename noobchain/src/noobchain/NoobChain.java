@@ -23,8 +23,8 @@ public class NoobChain {
 
 	public static void main(String[] args) {
 		// add our blocks to the blockchain ArrayList:
-		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); // Setup Bouncey castle as a
-																						// Security Provider
+		// Set up BouncyCastle as a security provider
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
 		// Create wallets:
 		walletX = new Wallet();
@@ -35,13 +35,15 @@ public class NoobChain {
 		// create genesis transaction, which sends 100 NoobCoin to WalletX:
 		// this adds funds to X's wallet
 		genesisTransaction = new Transaction(coinbase.publicKey, walletX.publicKey, 100f, null);
-		genesisTransaction.generateSignature(coinbase.privateKey); // manually sign the genesis transaction
-		genesisTransaction.transactionId = "0"; // manually set the transaction id
+		// Manually sign the genesis transaction
+		genesisTransaction.generateSignature(coinbase.privateKey);
+		// Manually set the transaction id
+		genesisTransaction.transactionId = "0";
+		// Manually add the Transactions Output
 		genesisTransaction.outputs.add(new TransactionOutput(genesisTransaction.recipient, genesisTransaction.value,
-				genesisTransaction.transactionId)); // manually add the Transactions Output
-		UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0)); // its important to store
-																							// our first transaction in
-																							// the UTXOs list.
+				genesisTransaction.transactionId));
+		// It is important to store our first transaction in the UTXOs list
+		UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
 
 		System.out.println("Creating and Mining Genesis block... ");
 		Block genesis = new Block("0");
@@ -137,11 +139,9 @@ public class NoobChain {
 		Block currentBlock;
 		Block previousBlock;
 		String hashTarget = new String(new char[difficulty]).replace('\0', '0');
-		HashMap<String, TransactionOutput> tempUTXOs = new HashMap<String, TransactionOutput>(); // a temporary working
-																									// list of unspent
-																									// transactions at a
-																									// given block
-																									// state.
+		// A temporary working list of unspent transactions at a given block state
+		HashMap<String, TransactionOutput> tempUTXOs = new HashMap<String, TransactionOutput>();
+
 		tempUTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
 		tempUTXOs.put(anotherTransaction.outputs.get(0).id, anotherTransaction.outputs.get(0));
 
